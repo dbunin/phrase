@@ -12,6 +12,12 @@
   #?(:cljs
      (:require-macros [phrase.alpha])))
 
+#?(:cljs
+   ;; Ensure s/assert is called in namespaces using spec as a workaround to a compiler bug.
+   ;; https://github.com/thheller/shadow-cljs/issues/611
+   ;; https://clojure.atlassian.net/browse/CLJS-3207
+   (s/assert true? true))
+
 (defn- normalize-pred
   "Retains symbols in pred. Replaces things like numbers with symbols.
 

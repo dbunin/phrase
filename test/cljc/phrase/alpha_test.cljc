@@ -1,15 +1,20 @@
 (ns phrase.alpha-test
   (:require
-    #?@(:cljs
-        [[goog.string :as gstr]
-         [goog.string.format]])
+   #?@(:cljs
+       [[goog.string :as gstr]
+        [goog.string.format]])
 
-    [clojure.spec.alpha :as s]
-    [clojure.string :as str]
-    [clojure.test :refer [deftest are is testing]]
-    [phrase.alpha :as phrase :refer [defphraser phrase-first]]))
+   [clojure.spec.alpha :as s]
+   [clojure.string :as str]
+   [clojure.test :refer [deftest are is testing]]
+   [phrase.alpha :as phrase :refer [defphraser phrase-first]]))
 
-#?(:cljs (def format gstr/format))
+#?(:cljs (def format gstr/format)
+
+   ;; Ensure s/assert is called in namespaces using spec as a workaround to a compiler bug.
+   ;; https://github.com/thheller/shadow-cljs/issues/611
+   ;; https://clojure.atlassian.net/browse/CLJS-3207
+   (s/assert true? true))
 
 (s/def ::age
   int?)
